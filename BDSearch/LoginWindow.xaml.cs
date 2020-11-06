@@ -44,5 +44,15 @@ namespace BDSearch
             this.tbMachineCode.Text = Util.GenerateMachineCode(this.tbUserName.Text.Trim());
 
         }
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBlock_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
     }
 }

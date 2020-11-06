@@ -22,6 +22,8 @@
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="0.7*"/>
         </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="2" Text="x" Foreground="Black" Opacity=".5" HorizontalAlignment="Right" Margin="0,0,5,0" FontSize="20" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp">
+        </TextBlock>
         <TextBlock Text="用户名" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <hc:TextBox x:Name="tbUserName" Grid.Row="1" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="请输入用户名" TextChanged="TbUserName_TextChanged"/>
 
