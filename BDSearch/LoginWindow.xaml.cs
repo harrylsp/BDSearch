@@ -31,7 +31,10 @@ namespace BDSearch
         /// <param name="e"></param>
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
 
+            this.Close();
         }
 
         /// <summary>

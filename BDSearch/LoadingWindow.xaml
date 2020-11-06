@@ -10,6 +10,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
+        Topmost="True"
         Title="LoadingWindow" Height="450" Width="600">
     <Grid>
         <StackPanel Width="600" Margin="0" VerticalAlignment="Center">

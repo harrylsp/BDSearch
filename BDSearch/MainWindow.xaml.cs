@@ -27,7 +27,12 @@ namespace BDSearch
             InitializeComponent();
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TextBlock_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }

@@ -9,7 +9,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="330" Width="430" AllowsTransparency="True" Background="Transparent" SnapsToDevicePixels="True">
-    <Grid Background="White">
+    <Grid Background="White" Margin="10" Effect="{StaticResource DropShadow}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>

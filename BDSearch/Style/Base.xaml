@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BDSearch.Style">
+    <!--阴影-->
+    <DropShadowEffect x:Key="DropShadow" ShadowDepth="0" Color="#FFC0C0C0" BlurRadius="10"/>
+</ResourceDictionary>

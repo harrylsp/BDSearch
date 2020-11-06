@@ -8,11 +8,20 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="600" Width="1024" AllowsTransparency="True" Background="Transparent" SnapsToDevicePixels="True" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="MainWindow" Height="600" Width="1024" AllowsTransparency="True" Background="Transparent" SnapsToDevicePixels="True">
     <Grid>
-        <TabControl Margin="10" Style="{DynamicResource TabControlInLine}" TabControl.TabStripPlacement="Left">
+        <Grid Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="571*"/>
+                <ColumnDefinition Width="429*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid HorizontalAlignment="Right" Background="White" Width="24">
+            <TextBlock Text="x" FontSize="20" Foreground="Black" Opacity=".5" Margin="0,5,0,0" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp"/>
+        </Grid>
+        <TabControl Margin="0,40,0,0" Style="{DynamicResource TabControlInLine}" TabControl.TabStripPlacement="Left">
             <TabItem Header="查询">
-                <local:SearchControl x:Name="tabSearch"/>
+                <local:SearchControl x:Name="tabSearch" BorderBrush="#FFE0E0E0" BorderThickness="0,1,0,0"/>
             </TabItem>
             <TabItem Header="帮助">
             </TabItem>
