@@ -1,0 +1,37 @@
+﻿<Window x:Class="BDSearch.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BDSearch"
+        mc:Ignorable="d"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="330" Width="430" AllowsTransparency="True" Background="Transparent" SnapsToDevicePixels="True">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.7*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="用户名" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <hc:TextBox x:Name="tbUserName" Grid.Row="1" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="请输入用户名" TextChanged="TbUserName_TextChanged"/>
+
+        <TextBlock Text="密码" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <hc:TextBox x:Name="tbPassword" Grid.Row="2" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="请输入密码"/>
+
+        <TextBlock Text="机器码" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <hc:TextBox x:Name="tbMachineCode" Grid.Row="3" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="机器码" IsEnabled="False"/>
+
+        <Button x:Name="btnLogin" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource ButtonInfo}" Width="250" Height="40" Background="#FF3F9BEE" Content="登陆" FontSize="16" Click="BtnLogin_Click"/>
+
+    </Grid>
+</Window>
