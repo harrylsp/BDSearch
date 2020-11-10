@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -31,10 +32,46 @@ namespace BDSearch
         /// <param name="e"></param>
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            var userName = this.tbUserName.Text.Trim();
+            var pwd = this.tbPassword.Text.Trim();
+            var mcCode = this.tbMachineCode.Text;
 
-            this.Close();
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                this.tbUserName.IsError = true;
+                this.tbUserName.ErrorStr = "请输入用户名";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(pwd))
+            {
+                this.tbPassword.IsError = true;
+                this.tbPassword.ErrorStr = "请输入密码";
+                return;
+            }
+
+            Task.Factory.StartNew(() =>
+            {
+                var response = HttpUtil.Login(userName, pwd, mcCode);
+
+                AppData.Token = response.token;
+                Application.Current.Dispatcher?.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
+                {
+                    if (response?.code == "1")
+                    {
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+
+                        this.Close();
+                    }
+                    else
+                    {
+                        this.tbLoginError.Text = response?.msg;
+                        this.tbLoginError.Visibility = Visibility.Visible;
+                    }
+                }));
+            });
+
         }
 
         /// <summary>
@@ -44,7 +81,7 @@ namespace BDSearch
         /// <param name="e"></param>
         private void TbUserName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.tbMachineCode.Text = Util.GenerateMachineCode(this.tbUserName.Text.Trim());
+            this.tbMachineCode.Text = Util.GenerateMachineCode(this.tbUserName.Text.Trim(), this.tbPassword.Text.Trim());
 
         }
 

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BDSearch"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="768" d:DesignWidth="1024" Background="White">
     <Grid Margin="10,50,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.4*"/>
@@ -22,7 +22,7 @@
                     <hc:TextBox x:Name="tbKc" hc:InfoElement.Placeholder="库存" hc:TitleElement.Title="库存：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <hc:TextBox x:Name="tbZjk" hc:InfoElement.Placeholder="自建库" hc:TitleElement.Title="SS号：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200"/>
+                    <hc:TextBox x:Name="tbZjk" hc:InfoElement.Placeholder="自建库" hc:TitleElement.Title="SS号：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200" ShowClearButton="True"/>
                     <Button x:Name="btnZjk" Style="{StaticResource ButtonInfo}" Background="#FF3F9BEE" Width="80" Content="自建库" Margin="30,0,0,0" Click="BtnZjk_Click"/>
                 </StackPanel>
             </StackPanel>
@@ -49,6 +49,10 @@
                     <DataGridTextColumn Width="1" Binding="{Binding Remark}" Header="Remark"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Center">
+                <TextBlock Text="剩余积分:" Foreground="Black"/>
+                <TextBlock x:Name="tbjf" Foreground="Black" Text="-1" Margin="20,0,0,0"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

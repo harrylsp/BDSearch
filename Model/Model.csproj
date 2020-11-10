@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseResponse.cs" />
     <Compile Include="BDModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

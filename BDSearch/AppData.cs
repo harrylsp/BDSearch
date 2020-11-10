@@ -12,5 +12,10 @@ namespace BDSearch
      /// 父级窗体
      /// </summary>
         public static Window ParentWindow;
+
+        /// <summary>
+        /// 登陆Token
+        /// </summary>
+        public static string Token { get; set; }
     }
 }

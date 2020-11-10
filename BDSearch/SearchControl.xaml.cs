@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -54,7 +56,27 @@ namespace BDSearch
         /// <param name="e"></param>
         private void BtnZjk_Click(object sender, RoutedEventArgs e)
         {
+            var ss = this.tbZjk.Text.Trim();
 
+            if (string.IsNullOrWhiteSpace(ss))
+            {
+                this.tbZjk.IsError = true;
+                this.tbZjk.ErrorStr = "请输入SS号";
+                return;
+            }
+
+            Task.Factory.StartNew(() =>
+            {
+                var response = HttpUtil.UpdateSource(ss, AppData.Token);
+
+                if (response?.code == "1")
+                {
+                    Application.Current.Dispatcher?.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
+                    {
+                        this.tbjf.Text = string.IsNullOrWhiteSpace(response.total) ? "0" : response.total;
+                    }));
+                }
+            });
         }
     }
 }

@@ -150,6 +150,10 @@
       <Project>{2dccfc8e-a920-4bd1-8c4c-ae9b1a2e8346}</Project>
       <Name>DBService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{0fa940b9-79b7-4be9-8659-3aed2d3c556e}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

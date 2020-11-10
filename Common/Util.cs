@@ -81,12 +81,25 @@ namespace Common
         /// 生成机器码
         /// </summary>
         /// <returns></returns>
-        public static string GenerateMachineCode(string userName)
+        public static string GenerateMachineCode(string userName, string password)
         {
             var mac = GetMacAddress();
-            var md5 = GetMd5Hash("[lsp]" + userName + mac);
+            var md5 = GetMd5Hash(userName + "[lsp]" + password + "[lsp]" + mac);
 
             return md5;
+        }
+
+        /// <summary>
+        /// 时间戳
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static long TryDateTimeToLong(DateTime dt)
+        {
+            DateTime dtStart = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
+            TimeSpan toNow = dt.Subtract(dtStart);
+            return Convert.ToInt64(toNow.TotalSeconds);
+
         }
     }
 }
