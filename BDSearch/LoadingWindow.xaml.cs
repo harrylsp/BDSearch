@@ -1,6 +1,8 @@
-﻿using DBService;
+﻿using Common;
+using DBService;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -33,12 +35,23 @@ namespace BDSearch
         /// </summary>
         public void Init()
         {
+            if (false && !Util.VerifyUser(ConfigurationManager.AppSettings["IsLogin"]))
+            {
+                //  非法软件操作
+                HandyControl.Controls.MessageBox.Error("非法软件操作！！！");
+                this.Close();
+                return;
+            }
+
+            Util.CreateKeyFile();
+
             new Thread(new ThreadStart(()=>
             {
                 DbInit init = new DbInit();
                 init.initTable();
 
-                Thread.Sleep(3000);
+
+                //Thread.Sleep(3000);
 
                 this.Dispatcher?.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
                 {

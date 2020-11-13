@@ -99,6 +99,68 @@ namespace Common
             DateTime dtStart = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
             TimeSpan toNow = dt.Subtract(dtStart);
             return Convert.ToInt64(toNow.TotalSeconds);
+        }
+
+        /// <summary>
+        /// 创建Key文件 做合法性软件使用校验
+        /// <paramref name="key"></paramref>
+        /// </summary>
+        public static void CreateKeyFile(string key = "加密文件")
+        {
+            var filePath = Path.Combine(GetAppExePath(), "key.data");
+            if (!File.Exists(filePath))
+            {
+                using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF7))
+                {
+                    byte[] b = Encoding.UTF7.GetBytes(key);
+                    sw.Write(Encoding.UTF7.GetString(b));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取Key文件内容
+        /// </summary>
+        /// <returns></returns>
+        public static string GetKeyFile()
+        {
+            var filePath = Path.Combine(GetAppExePath(), "key.data");
+            if (!File.Exists(filePath))
+            {
+                return "";
+            }
+
+            using (StreamReader sr = new StreamReader(filePath, Encoding.UTF7))
+            {
+                var b = Encoding.UTF7.GetBytes(sr.ReadToEnd());
+
+                return Encoding.UTF7.GetString(b);
+            }
+        }
+
+        /// <summary>
+        /// 本地合法性校验
+        /// </summary>
+        /// <param name="isLogin"></param>
+        /// <returns></returns>
+        public static bool VerifyUser(string isLogin)
+        {
+            var filePath = Path.Combine(GetAppExePath(), "key.data");
+
+            if (isLogin == "1")
+            {
+                if (!File.Exists(filePath))
+                {
+                    return false;
+                }
+
+                if (GetKeyFile() != GetMacAddress())
+                {
+                    return false;
+                }
+            }
+
+            return true;
 
         }
     }

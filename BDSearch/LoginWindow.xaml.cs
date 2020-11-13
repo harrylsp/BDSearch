@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace BDSearch
     /// </summary>
     public partial class LoginWindow : Window
     {
+        Configuration Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -62,6 +65,11 @@ namespace BDSearch
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
 
+                        // 写配置
+                        Config.AppSettings.Settings["IsLogin"].Value = "1";
+                        Config.Save();
+                        ConfigurationManager.RefreshSection("appSettings");
+
                         this.Close();
                     }
                     else
@@ -81,7 +89,7 @@ namespace BDSearch
         /// <param name="e"></param>
         private void TbUserName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.tbMachineCode.Text = Util.GenerateMachineCode(this.tbUserName.Text.Trim(), this.tbPassword.Text.Trim());
+            this.tbMachineCode.Text = Util.GetMacAddress();
 
         }
 

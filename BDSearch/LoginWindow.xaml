@@ -9,32 +9,50 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="330" Width="430" AllowsTransparency="True" Background="Transparent" SnapsToDevicePixels="True">
-    <Grid Background="White" Margin="10" Effect="{StaticResource DropShadow}">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition Width="0.7*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Text="x" Foreground="Black" Opacity=".5" HorizontalAlignment="Right" Margin="0,0,5,0" FontSize="20" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp">
-        </TextBlock>
-        <TextBlock Text="用户名" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <hc:TextBox x:Name="tbUserName" Grid.Row="1" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="请输入用户名" TextChanged="TbUserName_TextChanged" ShowClearButton="True"/>
+    <Window.Resources>
+        <Style x:Key="borderStyle" TargetType="Border">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Border  Background="White" Margin="10" Effect="{StaticResource DropShadow}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.7*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Red">
+                <Border x:Name="bdClose" Style="{StaticResource borderStyle}">
+                    <TextBlock Text="x" Foreground="Black" Visibility="Visible" Opacity=".5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp"/>
+                </Border>
+            </StackPanel>
+            
+            <TextBlock Text="用户名" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <hc:TextBox x:Name="tbUserName" Grid.Row="1" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="请输入用户名" TextChanged="TbUserName_TextChanged" ShowClearButton="True"/>
 
-        <TextBlock Text="密码" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <hc:TextBox x:Name="tbPassword" Grid.Row="2" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="请输入密码" ShowClearButton="True"/>
+            <TextBlock Text="密码" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <hc:TextBox x:Name="tbPassword" Grid.Row="2" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="请输入密码" ShowClearButton="True"/>
 
-        <TextBlock Text="机器码" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <hc:TextBox x:Name="tbMachineCode" Grid.Row="3" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="机器码" IsReadOnly="True"/>
+            <TextBlock Text="机器码" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <hc:TextBox x:Name="tbMachineCode" Grid.Row="3" Grid.Column="1" Width="250" Height="30" hc:InfoElement.Placeholder="机器码" IsReadOnly="False"/>
 
-        <TextBlock x:Name="tbLoginError" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Foreground="Red" HorizontalAlignment="Center" Visibility="Collapsed"/>
-        <Button x:Name="btnLogin" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource ButtonInfo}" Width="250" Height="40" Background="#FF3F9BEE" Content="登陆" FontSize="16" Click="BtnLogin_Click"/>
+            <TextBlock x:Name="tbLoginError" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Foreground="Red" HorizontalAlignment="Center" Visibility="Collapsed"/>
+            <Button x:Name="btnLogin" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource ButtonInfo}" Width="250" Height="40" Background="#FF3F9BEE" Content="登陆" FontSize="16" Click="BtnLogin_Click"/>
 
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

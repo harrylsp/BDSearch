@@ -42,7 +42,7 @@ namespace Common
         {
             WebHeaderCollection webHeader = new WebHeaderCollection();
             webHeader.Add("_username", userName);
-            webHeader.Add("_pwd", password);
+            webHeader.Add("_pwd", Util.GetMd5Hash(password));
 
             NameValueCollection nameValue = new NameValueCollection();
             nameValue.Add("_appKey", machineCode);

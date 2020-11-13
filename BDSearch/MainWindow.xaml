@@ -9,24 +9,40 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="600" Width="1024" AllowsTransparency="True" Background="Transparent" SnapsToDevicePixels="True">
-    <Grid>
-        <Grid Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="571*"/>
-                <ColumnDefinition Width="429*"/>
-            </Grid.ColumnDefinitions>
+    <Window.Resources>
+        <Style x:Key="borderStyle" TargetType="Border">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Border  Background="White" Margin="10" Effect="{StaticResource DropShadow}">
+        <Grid>
+            <Grid Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="571*"/>
+                    <ColumnDefinition Width="429*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Border Style="{StaticResource borderStyle}">
+                    <TextBlock Text="x" FontSize="20" Foreground="Black" Opacity=".5" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp"/>
+                </Border>
+            </StackPanel>
+            <TabControl Margin="0,40,0,0" Style="{DynamicResource TabControlInLine}" TabControl.TabStripPlacement="Left">
+                <TabItem Header="查询">
+                    <local:SearchControl x:Name="tabSearch" BorderBrush="#FFE0E0E0" BorderThickness="0,1,0,0"/>
+                </TabItem>
+                <TabItem Header="帮助">
+                </TabItem>
+                <TabItem Header="选项卡3">
+                </TabItem>
+            </TabControl>
         </Grid>
-        <Grid HorizontalAlignment="Right" Background="White" Width="24">
-            <TextBlock Text="x" FontSize="20" Foreground="Black" Opacity=".5" Margin="0,5,0,0" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp"/>
-        </Grid>
-        <TabControl Margin="0,40,0,0" Style="{DynamicResource TabControlInLine}" TabControl.TabStripPlacement="Left">
-            <TabItem Header="查询">
-                <local:SearchControl x:Name="tabSearch" BorderBrush="#FFE0E0E0" BorderThickness="0,1,0,0"/>
-            </TabItem>
-            <TabItem Header="帮助">
-            </TabItem>
-            <TabItem Header="选项卡3">
-            </TabItem>
-        </TabControl>
-    </Grid>
+    </Border>
 </Window>
