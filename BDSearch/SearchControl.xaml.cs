@@ -27,18 +27,19 @@ namespace BDSearch
         {
             InitializeComponent();
 
-            List<TestModel> list = new List<TestModel>
-            {
-                new TestModel{Index = 1, Name = "lsp" , Selected = true, Type = "1", Remark = "lsp"},
-                new TestModel{Index = 2, Name = "lsp" , Selected = true, Type = "1", Remark = "lsp"}
-            };
+            //List<TestModel> list = new List<TestModel>
+            //{
+            //    new TestModel{Index = 1, Name = "lsp" , Selected = true, Type = "1", Remark = "lsp"},
+            //    new TestModel{Index = 2, Name = "lsp" , Selected = true, Type = "1", Remark = "lsp"}
+            //};
 
-            for (int i = 0; i < 50; i++)
-            {
-                list.Add(new TestModel { Index = 2, Name = "lsp", Selected = true, Type = "1", Remark = "lsp" });
-            }
+            //for (int i = 0; i < 50; i++)
+            //{
+            //    list.Add(new TestModel { Index = 2, Name = "lsp", Selected = true, Type = "1", Remark = "lsp" });
+            //}
 
-            this.dataGrid.ItemsSource = list;
+            //this.dataGrid.ItemsSource = list;
+            this.tbjf.Text = AppData.Token;
         }
 
         /// <summary>
@@ -48,20 +49,30 @@ namespace BDSearch
         /// <param name="e"></param>
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            this.tbZjk.IsEnabled = false;
-
-            var where = " and fid='" + this.tbSs.Text.Trim() + "';";
-            BDService db = new BDService();
-            var list = db.Query(where);
+            var list = IsExist(this.tbSs.Text.Trim());
             if (list?.Count > 0)
             {
                 this.tbKc.Text = "有";
+                this.tbZjk.Text = "1";
+                this.dataGrid.ItemsSource = list;
             }
             else
             {
                 this.tbKc.Text = "无";
-                this.tbZjk.IsEnabled = true;
+                this.tbZjk.Text = "";
             }
+        }
+
+        /// <summary>
+        /// 查询对应ss号 链接信息
+        /// </summary>
+        /// <param name="ss"></param>
+        /// <returns></returns>
+        public List<BDModel> IsExist(string ss)
+        {
+            var where = " and fid='" + this.tbSs.Text.Trim() + "';";
+            BDService db = new BDService();
+            return db.Query(where);
         }
 
         /// <summary>
@@ -71,19 +82,21 @@ namespace BDSearch
         /// <param name="e"></param>
         private void BtnZjk_Click(object sender, RoutedEventArgs e)
         {
-            var ss = this.tbZjk.Text.Trim();
+            var ss = this.tbSs.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(ss))
             {
-                this.tbZjk.IsError = true;
-                this.tbZjk.ErrorStr = "请输入SS号";
+                this.tbSs.IsError = true;
+                this.tbSs.ErrorStr = "请输入SS号";
                 return;
             }
 
-            if (this.tbKc.Text == "有")
+            var localList = IsExist(ss);
+            if (localList?.Count > 0)
             {
                 this.tbZjk.IsError = true;
                 this.tbZjk.ErrorStr = "本地已存在改分享链接";
+                BtnSearch_Click(null, null);
                 return;
             }
 
@@ -117,6 +130,23 @@ namespace BDSearch
                     }));
                 }
             });
+        }
+
+        /// <summary>
+        /// 复制
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Windows.Controls.MenuItem item = sender as System.Windows.Controls.MenuItem;
+                Clipboard.SetText(item?.Tag.ToString());
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

@@ -27,5 +27,10 @@ namespace BDSearch
         /// 密码
         /// </summary>
         public static string Password { get; set; }
+
+        /// <summary>
+        /// 总分
+        /// </summary>
+        public static string Total { get; set; }
     }
 }

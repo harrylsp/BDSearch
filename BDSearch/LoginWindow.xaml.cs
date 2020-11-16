@@ -57,7 +57,6 @@ namespace BDSearch
             {
                 var response = HttpUtil.Login(userName, pwd, mcCode);
 
-                AppData.Token = response.token;
                 Application.Current.Dispatcher?.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
                 {
                     if (response?.code == "1")
@@ -70,8 +69,10 @@ namespace BDSearch
                         Config.Save();
                         ConfigurationManager.RefreshSection("appSettings");
 
+                        AppData.Token = response.token;
                         AppData.UserName = userName;
                         AppData.Password = Util.GetMd5Hash(pwd);
+                        AppData.Total = response.total;
 
                         this.Close();
                     }

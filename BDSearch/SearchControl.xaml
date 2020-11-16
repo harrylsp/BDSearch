@@ -7,6 +7,118 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024" Background="White">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type DataGrid}">
+            <!--网格线颜色-->
+            <Setter Property="CanUserResizeColumns" Value="false"/>
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="HorizontalGridLinesBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="#dcdcdc"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalGridLinesBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="White"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--标题栏样式-->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="40" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridColumnHeader">
+                        <Border x:Name="BackgroundBorder"
+                                    BorderThickness="0"
+                                    BorderBrush="#CCCCCC"
+                                    Width="Auto">
+                            <Grid Background="#FFFAFAFA">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Grid.Column="0"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                <Border BorderBrush="#FFE6E6E6"
+                                            BorderThickness="0,0,1,0"
+                                            Margin="0,16,0,16"></Border>
+                                <Border BorderBrush="#FFE6E6E6"
+                                            BorderThickness="0,0,0,1"></Border>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        <!--行样式触发-->
+        <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
+        <Style x:Key="rowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="{x:Null}" />
+            <!--<Setter Property="Height" Value="45"/>-->
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="Foreground" Value="#333333" />
+            <Style.Triggers>
+                <!--隔行换色-->
+                <Trigger Property="AlternationIndex" Value="0" >
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+                <Trigger Property="AlternationIndex" Value="1" >
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFE6F7FF"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FFE6F7FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--单元格样式触发-->
+        <Style TargetType="DataGridCell">
+            <Setter Property="ToolTipService.ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Content.Text}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <ContentPresenter>
+                            <ContentPresenter.ContentTemplate>
+                                <DataTemplate>
+                                    <Grid Height="40" Background="Transparent">
+                                        <TextBlock TextTrimming="CharacterEllipsis"
+                                                TextAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                Text="{Binding Text}">
+                                            <TextBlock.ContextMenu>
+                                                <ContextMenu StaysOpen="False">
+                                                    <MenuItem Header="复制" Tag="{Binding Text}" Click="MenuItem_Click"></MenuItem>
+                                                </ContextMenu>
+                                            </TextBlock.ContextMenu>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ContentPresenter.ContentTemplate>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="10,50,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.4*"/>
@@ -22,18 +134,29 @@
                     <hc:TextBox x:Name="tbKc" hc:InfoElement.Placeholder="库存" hc:TitleElement.Title="库存：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <hc:TextBox x:Name="tbZjk" hc:InfoElement.Placeholder="自建库" hc:TitleElement.Title="自建库：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200" ShowClearButton="True"/>
+                    <hc:TextBox x:Name="tbZjk" hc:InfoElement.Placeholder="自建库" hc:TitleElement.Title="自建库：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200" IsEnabled="False"/>
                     <Button x:Name="btnZjk" Style="{StaticResource ButtonInfo}" Background="#FF3F9BEE" Width="80" Content="自建库" Margin="30,0,0,0" Click="BtnZjk_Click"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
-            <DataGrid x:Name="dataGrid" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" VerticalAlignment="Top" MaxHeight="450">
-                <DataGrid.RowHeaderTemplate>
-                    <DataTemplate>
-                        <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
-                    </DataTemplate>
-                </DataGrid.RowHeaderTemplate>
+            <DataGrid x:Name="dataGrid"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Stretch"
+                      AutoGenerateColumns="False"
+                      CanUserResizeColumns="True"
+                      CanUserReorderColumns="False"
+                      AlternationCount="2"
+                      RowHeaderWidth="0"
+                      CanUserAddRows="False"
+                      CanUserSortColumns="False"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      ScrollViewer.CanContentScroll="False"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      RowStyle="{StaticResource rowStyle}"
+                      >
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Width="80" CanUserResize="False" Binding="{Binding fno}" Header="序号"/>
                     <DataGridTextColumn Width="100" Binding="{Binding fid}" Header="SS"/>
