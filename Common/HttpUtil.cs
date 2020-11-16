@@ -56,18 +56,24 @@ namespace Common
         /// <summary>
         /// 自建库查询
         /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="password">密码</param>
         /// <param name="ss">ss号</param>
         /// <param name="token">登陆token</param>
         /// <returns></returns>
-        public static BaseResponse UpdateSource(string ss, string token)
+        public static UpdateSourceResponse UpdateSource(string userName, string password, string ss, string token)
         {
             WebHeaderCollection webHeader = new WebHeaderCollection();
-            webHeader.Add("ss", ss);
-            webHeader.Add("_token", token);
+            webHeader.Add("_username", ss);
+            webHeader.Add("_pwd", token);
 
-            var ret = CreateRequest("/API/UpdateScore", webHeader, null);
+            NameValueCollection nameValue = new NameValueCollection();
+            nameValue.Add("_ss", ss);
+            nameValue.Add("_token", token);
 
-            return JsonConvert.DeserializeObject<BaseResponse>(ret);
+            var ret = CreateRequest("/API/UpdateScore", webHeader, nameValue);
+
+            return JsonConvert.DeserializeObject<UpdateSourceResponse>(ret);
         }
     }
 }

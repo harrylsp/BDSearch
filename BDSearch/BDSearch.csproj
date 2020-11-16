@@ -144,6 +144,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessService\BusinessService.csproj">
+      <Project>{988358b7-3cf5-42d3-a2d7-a729bc6ff4dc}</Project>
+      <Name>BusinessService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{6c72bb6b-1cc2-426b-975d-a5196356e2a8}</Project>
       <Name>Common</Name>

@@ -17,5 +17,15 @@ namespace BDSearch
         /// 登陆Token
         /// </summary>
         public static string Token { get; set; }
+
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public static string UserName { get; set; }
+
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public static string Password { get; set; }
     }
 }

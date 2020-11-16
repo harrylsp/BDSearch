@@ -19,10 +19,10 @@
                     <Button x:Name="btnSearch" Style="{StaticResource ButtonInfo}" Background="#FF3F9BEE" Width="80" Content="查询" Margin="30,0,0,0" Click="BtnSearch_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,20">
-                    <hc:TextBox x:Name="tbKc" hc:InfoElement.Placeholder="库存" hc:TitleElement.Title="库存：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200"/>
+                    <hc:TextBox x:Name="tbKc" hc:InfoElement.Placeholder="库存" hc:TitleElement.Title="库存：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <hc:TextBox x:Name="tbZjk" hc:InfoElement.Placeholder="自建库" hc:TitleElement.Title="SS号：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200" ShowClearButton="True"/>
+                    <hc:TextBox x:Name="tbZjk" hc:InfoElement.Placeholder="自建库" hc:TitleElement.Title="自建库：" hc:TitleElement.TitleAlignment="Left" hc:TitleElement.TitleWidth="50" Width="200" ShowClearButton="True"/>
                     <Button x:Name="btnZjk" Style="{StaticResource ButtonInfo}" Background="#FF3F9BEE" Width="80" Content="自建库" Margin="30,0,0,0" Click="BtnZjk_Click"/>
                 </StackPanel>
             </StackPanel>
@@ -35,18 +35,10 @@
                     </DataTemplate>
                 </DataGrid.RowHeaderTemplate>
                 <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True" Width="80" CanUserResize="False" Binding="{Binding Index}" Header="Index"/>
-                    <DataGridTemplateColumn Width="60" CanUserResize="False">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding ImgPath}" Width="32" Height="32" Stretch="Uniform"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Width="1" Binding="{Binding Name}" Header="Name"/>
-                    <DataGridCheckBoxColumn Width="100" CanUserResize="False" Binding="{Binding IsSelected}" Header="Selected"/>
-                    <DataGridComboBoxColumn Width="100" CanUserResize="False" SelectedValueBinding="{Binding Type}" Header="Type"/>
-                    <DataGridTextColumn Width="1" Binding="{Binding Remark}" Header="Remark"/>
+                    <DataGridTextColumn IsReadOnly="True" Width="80" CanUserResize="False" Binding="{Binding fno}" Header="序号"/>
+                    <DataGridTextColumn Width="100" Binding="{Binding fid}" Header="SS"/>
+                    <DataGridTextColumn Width="200" Binding="{Binding slink}" Header="链接"/>
+                    <DataGridTextColumn Width="100" Binding="{Binding scode}" Header="提取码"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Center">

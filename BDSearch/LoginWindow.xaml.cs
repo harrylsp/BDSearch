@@ -70,6 +70,9 @@ namespace BDSearch
                         Config.Save();
                         ConfigurationManager.RefreshSection("appSettings");
 
+                        AppData.UserName = userName;
+                        AppData.Password = Util.GetMd5Hash(pwd);
+
                         this.Close();
                     }
                     else
