@@ -21,7 +21,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border  Background="White" Margin="10" Effect="{StaticResource DropShadow}">
+    <Border Background="White" Margin="10" Effect="{StaticResource DropShadow}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>

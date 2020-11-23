@@ -3,4 +3,10 @@
                     xmlns:local="clr-namespace:BDSearch.Style">
     <!--阴影-->
     <DropShadowEffect x:Key="DropShadow" ShadowDepth="0" Color="#FFC0C0C0" BlurRadius="10"/>
+
+    <!--渐变-->
+    <LinearGradientBrush x:Key="BacgroundLinearGradientBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Offset="0" Color="#1C69CB"></GradientStop>
+        <GradientStop Offset="1" Color="#57A1E8"></GradientStop>
+    </LinearGradientBrush>
 </ResourceDictionary>

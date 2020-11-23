@@ -95,7 +95,7 @@ namespace BDSearch
             if (localList?.Count > 0)
             {
                 this.tbZjk.IsError = true;
-                this.tbZjk.ErrorStr = "本地已存在改分享链接";
+                this.tbZjk.ErrorStr = "本地已存在该分享链接";
                 BtnSearch_Click(null, null);
                 return;
             }

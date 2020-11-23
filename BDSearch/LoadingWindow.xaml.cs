@@ -27,7 +27,7 @@ namespace BDSearch
         {
             InitializeComponent();
 
-            Init(); 
+            Init();
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace BDSearch
         /// </summary>
         public void Init()
         {
-            if (false && !Util.VerifyUser(ConfigurationManager.AppSettings["IsLogin"]))
+            if (!Util.VerifyUser(ConfigurationManager.AppSettings["IsLogin"]))
             {
                 //  非法软件操作
                 HandyControl.Controls.MessageBox.Error("非法软件操作！！！");
@@ -51,7 +51,7 @@ namespace BDSearch
                 init.initTable();
 
 
-                //Thread.Sleep(3000);
+                Thread.Sleep(2000);
 
                 this.Dispatcher?.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
                 {
